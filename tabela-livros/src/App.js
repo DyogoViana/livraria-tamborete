@@ -7,30 +7,36 @@ import TabelaFoot from "./components/tabelas/TabelaFoot";
 
 class App extends Component {
 	state = {
-		livros: [
-			{
-				id: "978-85-7522-632-2",
-				titulo: "CSS Grid Layout",
-				autor: "Maurício Samy Silva"
-			},
-			{
-				id: "978-85-7522-677-3",
-				titulo: "Node Essencial",
-				autor: "Ricardo R. Lecheta"
-			},
-			{
-				id: "978-85-7522-512-7",
-				titulo: "Aprendendo Material Design",
-				autor: "Kyle Mew"
-			}
-		]
+		livros: []
+	};
+
+	componentDidMount() {
+		fetch("/api/livros.json")
+		 .then(response => response.json())
+		 .then(livros => this.setState({ livros }))
+		 .catch(function(error) {
+			 console.log("Erro na requisição.");
+		 })
+		 .finally(function() {
+			 console.log("Sempre retorna.");
+		 });
+	};
+
+	// remover linha da tabela.
+	handleRemoverlinha = (id) => {
+		const livros = this.state.livros.filter(listaLivros => listaLivros.id !== id);
+		this.setState({livros});
 	}
+
 	render() {
 		return (
 			<table className="tabela">
 				<TabelaHead />
-				<TabelaBody livros={ this.state.livros }/>
-				<TabelaFoot />
+				<TabelaBody
+					livros={this.state.livros}
+					removerLinha={this.handleRemoverlinha}
+				/>
+				<TabelaFoot quantidadeLivros={this.state.livros.length} />
 			</table>
 		);
 	}
