@@ -8,14 +8,24 @@ const TabelaHead = (props) => (
 			<th colSpan="4">Tabela de Livros</th>
 		</tr>
 		<tr>
-			<th>ISBN</th>
+			<th>ISBN
+			<div className="container-setinhas">
+					<div onClick={() => props.ordenarCrescente()}> &#129093; </div>
+					<div onClick={() => props.ordenarDecrescente()}> &#129095; </div>
+				</div>
+			</th>
 			<th>Título
 				<div className="container-setinhas">
 					<div onClick={() => props.ordenarCrescente()}> &#129093; </div>
 					<div onClick={() => props.ordenarDecrescente()}> &#129095; </div>
 				</div>
 			</th>
-			<th>Autor</th>
+			<th>Autor
+			<div className="container-setinhas">
+					<div onClick={() => props.ordenarCrescente()}> &#129093; </div>
+					<div onClick={() => props.ordenarDecrescente()}> &#129095; </div>
+				</div>
+			</th>
 			<th></th>
 		</tr>
 	</thead>
