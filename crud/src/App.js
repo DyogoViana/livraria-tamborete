@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Menu from "./components/Menu";
 import TabelaLivros from "./components/TabelaLivros";
+import CadastrarLivros from "./components/CadastrarLivros";
+import NotFound from "./components/NotFound";
 
 class App extends Component {
 	state = {
@@ -30,11 +34,23 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<Router>
 				<Menu />
-				<TabelaLivros livros={this.state.livros} />
-			</div>
-		);
+				<Switch>
+					<Route
+						exact
+						path="/"
+						render={() => <TabelaLivros livros={this.state.livros} />}
+					/>
+					<Route
+						exact
+						path="/cadastrar"
+						render={() => <CadastrarLivros />}
+					/>
+					<Route component={NotFound} />
+				</Switch>
+			</Router>
+		)
 	}
 }
 
