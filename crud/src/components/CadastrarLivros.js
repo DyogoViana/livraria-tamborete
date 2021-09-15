@@ -1,7 +1,30 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 class CadastrarLivros extends Component {
+	state = {
+		livro: {
+			id: this.props.livro.id,
+			isbn: this.props.livro.isbn,
+			titulo: this.props.livro.titulo,
+			autor: this.props.livro.autor
+		},
+
+		redirecionar: false
+	};
+
+	// Adicionar livro.
+	handleLivroForm = e => {
+		e.preventDefault();
+		this.props.inserirLivro(this.state.livro);
+		this.setState({ redirecionar: true });
+	};
+
 	render() {
+		if (this.state.redirecionar === true) {
+			return <Redirect to="/" />;
+		}
+
 		return (
 			<form>
 				<h1>Cadastrar livros</h1>
@@ -14,9 +37,18 @@ class CadastrarLivros extends Component {
 					<input
 						type="text"
 						autoFocus
+						defaultValue={this.props.isbn}
 						id="fisbn"
 						required
 						pattern="^978-85-7522-[0-9]{3}-[0-9]{1}$"
+						value={this.state.livro.isbn}
+						onChange={e => this.setState({
+							livro: {
+								...this.state.livro,
+								isbn: e.target.value
+							}
+						}
+						)}
 					/>
 				</p>
 
@@ -24,8 +56,17 @@ class CadastrarLivros extends Component {
 					<label htmlFor="ftitulo"> Título </label>
 					<input
 						type="text"
+						defaultValue={this.props.titulo}
+						ref="titulo"
 						id="ftitulo"
 						required
+						value={this.state.livro.titulo}
+						onChange={e => this.setState({
+							livro: {
+								...this.state.livro,
+								titulo: e.target.value
+							}
+						})}
 					/>
 				</p>
 
@@ -33,8 +74,17 @@ class CadastrarLivros extends Component {
 					<label htmlFor="fautor"> Autor </label>
 					<input
 						type="text"
+						defaultValue={this.props.autor}
+						ref="autor"
 						id="fautor"
 						required
+						value={this.state.livro.autor}
+						onChange={e => this.setState({
+							livro: {
+								...this.state.livro,
+								autor: e.target.value
+							}
+						})}
 					/>
 				</p>
 
