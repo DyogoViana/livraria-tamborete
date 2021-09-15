@@ -26,7 +26,7 @@ class CadastrarLivros extends Component {
 		}
 
 		return (
-			<form>
+			<form onSubmit={this.handleLivroForm}>
 				<h1>Cadastrar livros</h1>
 				<p>
 					<label htmlFor="fisbn">

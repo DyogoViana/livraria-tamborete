@@ -57,7 +57,7 @@ class App extends Component {
 						render={() => (
 							<CadastrarLivros
 								inserirLivro={this.inserirLivro}
-								livro={{ id: 0, isbn: "", titulo: "", autor: "" }}
+								livro = {{ id: 0, isbn: "", titulo: "", autor: "" }}
 							/>
 						)}
 					/>

@@ -21,10 +21,10 @@ const TabelaLivros = ({ livros }) => {
 
 					<tbody>
 						{livros.map(livro => (
-							<tr>
-								<td>ISBN do livro</td>
-								<td>Título do livro</td>
-								<td>Autor do livro</td>
+							<tr key={livro.isbn}>
+								<td>{livro.isbn}</td>
+								<td>{livro.titulo}</td>
+								<td>{livro.autor}</td>
 								<td>
 									<button className="botao editar">Editar</button>
 								</td>
