@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import Menu from "./components/Menu";
 import TabelaLivros from "./components/TabelaLivros";
@@ -41,6 +41,23 @@ class App extends Component {
 		});
 	};
 
+	// Editar Livro.
+	editarLivro = livro => {
+		const index = this.state.livros.findIndex(
+			p => p.id === livro.id
+		);
+
+		const livros = this.state.livros
+			.slice(0, index)
+			.concat(this.state.livros.slice(index + 1));
+
+		const novosLivros = [...livros, livro].sort((a, b) => a.id - b.id);
+
+		this.setState({
+			livros: novosLivros
+		});
+	}
+
 	render() {
 		return (
 			<Router>
@@ -48,16 +65,38 @@ class App extends Component {
 				<Switch>
 					<Route
 						exact
+						path="/editar/:isbnLivro"
+						render={props => {
+							const livro = this.state.livros.find(
+								livro => livro.isbn === props.match.params.isbnLivro
+							);
+
+							if (livro) {
+								return (
+									<CadastrarLivros
+										editarLivro={this.editarLivro}
+										livro={livro}
+									/>
+								)
+							} else {
+								return <Redirect to="/" />
+							}
+						}}
+					/>
+
+					<Route
+						exact
 						path="/"
 						render={() => <TabelaLivros livros={this.state.livros} />}
 					/>
+
 					<Route
 						exact
 						path="/cadastrar"
 						render={() => (
 							<CadastrarLivros
 								inserirLivro={this.inserirLivro}
-								livro = {{ id: 0, isbn: "", titulo: "", autor: "" }}
+								livro={{ id: 0, isbn: "", titulo: "", autor: "" }}
 							/>
 						)}
 					/>

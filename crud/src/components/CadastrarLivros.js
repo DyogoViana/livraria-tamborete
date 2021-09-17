@@ -16,7 +16,13 @@ class CadastrarLivros extends Component {
 	// Adicionar livro.
 	handleLivroForm = e => {
 		e.preventDefault();
-		this.props.inserirLivro(this.state.livro);
+
+		if (this.props.editarLivro) {
+			this.props.editarLivro(this.state.livro);
+		} else {
+			this.props.inserirLivro(this.state.livro);
+		}
+
 		this.setState({ redirecionar: true });
 	};
 
