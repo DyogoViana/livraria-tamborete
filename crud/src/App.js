@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import SimpleStorage from "react-simple-storage";
 
 import Menu from "./components/Menu";
 import TabelaLivros from "./components/TabelaLivros";
@@ -8,28 +9,7 @@ import NotFound from "./components/NotFound";
 
 class App extends Component {
 	state = {
-		livros: [
-			{
-				id: 1,
-				isbn: "978-85-7522-403-8",
-				titulo: "HTML 5 - 2ª Edição",
-				autor: "Maurício Samy Silva"
-			},
-
-			{
-				id: 2,
-				isbn: "978-85-7522-807-4",
-				titulo: "introdução ao Pentest",
-				autor: "Daniel Moreno"
-			},
-
-			{
-				id: 3,
-				isbn: "978-85-7522-780-8",
-				titulo: "Internet das Coisas para Desenvolvedores",
-				autor: "Ricardo da Silva Ogliari"
-			}
-		]
+		livros: []
 	};
 
 	// Adicionar Livro.
@@ -72,6 +52,7 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
+				<SimpleStorage parent={this} />
 				<Menu />
 				<Switch>
 					<Route
