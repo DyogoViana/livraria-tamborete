@@ -58,6 +58,17 @@ class App extends Component {
 		});
 	}
 
+	// Remover Livro.
+	removerLivro = livro => {
+		if (window.confirm("Você realmente quer remover esse livro?")) {
+			const livros = this.state.livros.filter(
+				pesquisar => pesquisar.isbn !== livro.isbn
+			);
+
+			this.setState({ livros });
+		}
+	}
+
 	render() {
 		return (
 			<Router>
@@ -87,7 +98,10 @@ class App extends Component {
 					<Route
 						exact
 						path="/"
-						render={() => <TabelaLivros livros={this.state.livros} />}
+						render={() => <TabelaLivros
+							livros={this.state.livros}
+							removerLivro={this.removerLivro}
+						/>}
 					/>
 
 					<Route
