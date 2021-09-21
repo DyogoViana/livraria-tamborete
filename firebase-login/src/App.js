@@ -5,7 +5,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Menu from "./components/Menu";
+
+import Header from "./components/Header";
 import TabelaLivros from "./components/TabelaLivros";
 import CadastrarLivros from "./components/CadastrarLivros";
 import NotFound from "./components/NotFound";
@@ -45,7 +46,7 @@ class App extends Component {
     return (
       <Router>
         <SimpleStorage parent={this} />
-        <Menu />
+        <Header />
         <Switch>
           <Route
             exact
