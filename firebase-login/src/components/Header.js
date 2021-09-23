@@ -1,29 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = (props) => {
+const Header = ({ isAuthenticated }) => {
 	return (
 		<nav className="menu">
 			<ul>
 				<li>
 					<Link to="/">Home</Link>
 				</li>
-				<li>
-					<Link to="/cadastrar">Cadastrar</Link>
-				</li>
-				<li>
-					<Link to="/login">Login</Link>
-				</li>
-				<li>
-					<button
-						className="btnLink"
-						onClick={(event) => {
-							event.preventDefault();
-						}}
-					>
-						Logout
-					</button>
-				</li>
+
+				{isAuthenticated && (
+					<li>
+						<Link to="/cadastrar">Cadastrar</Link>
+					</li>
+				)}
+
+				{isAuthenticated && (
+					<li>
+						<button
+							className="btnLink"
+							onClick={(event) => {
+								event.preventDefault();
+							}}
+						>
+							Logout
+						</button>
+					</li>
+				)}
+
+				{!isAuthenticated && (
+					<li>
+						<Link to="/login">Login</Link>
+					</li>
+				)}
 			</ul>
 		</nav>
 	);
